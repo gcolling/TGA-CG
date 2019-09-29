@@ -79,9 +79,11 @@
       <AdditionalIncludeDirectories>C:\Users\i852573\Documents\Colling\Facul\CG\glm-0.9.9-a2;C:\Users\i852573\Documents\Colling\Facul\CG\glew-2.1.0\include;C:\Users\i852573\Documents\Colling\Facul\CG\GLFW-3.1.2-lib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>
+      </SubSystem>
       <AdditionalLibraryDirectories>C:\Users\i852573\Documents\Colling\Facul\CG\glew-2.1.0\lib;C:\Users\i852573\Documents\Colling\Facul\CG\GLFW-3.1.2-lib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glu32.lib;glew32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

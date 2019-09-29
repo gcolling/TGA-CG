@@ -1,0 +1,7 @@
+﻿  main.cpp
+C:\Users\i852573\Documents\Colling\Facul\CG\TGA\main.cpp(211,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\i852573\Documents\Colling\Facul\CG\TGA\main.cpp(213,21): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\i852573\Documents\Colling\Facul\CG\TGA\main.cpp(222,22): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\i852573\Documents\Colling\Facul\CG\TGA\main.cpp(301,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\i852573\Documents\Colling\Facul\CG\TGA\main.cpp(334,21): warning C4018:  '<': signed/unsigned mismatch
+  TGA.vcxproj -> C:\Users\i852573\Documents\Colling\Facul\CG\TGA\Debug\TGA.exe
