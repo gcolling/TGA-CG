@@ -2,12 +2,11 @@
 out vec4 FragColor;
 
 in vec2 textCo;
-uniform sampler2D tex;
+in vec4 selectedC;
+in float selectedO;
+uniform sampler2D texture;
 
 void main(){
-    vec4 texel0 = texture(tex, textCo);
-    if(texel0.a < 0.5){
-        discard;
-    }
-    FragColor = texel0;
+    vec4 fText = texture2D(texture, textCo);
+    FragColor = fText;
 }

@@ -4,11 +4,15 @@ layout (location = 1) in vec2 vt;
 layout (location = 2) in vec3 vn;
 
 uniform mat4 view, projection, model;
-out vec3 vertCo;
+in vec4 selectedColor;
+in float selected;
 out vec2 textCo;
-out vec3 normCo;
+out vec4 selectedC;
+out float selectedO;
 
 void main(){
     textCo = vt;
+    selectedO = selected;
+    selectedC = selectedColor;
     gl_Position = projection * view * model * vec4(vp, 1.0);
 }

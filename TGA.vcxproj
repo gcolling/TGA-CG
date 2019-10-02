@@ -133,6 +133,7 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MaterialReader.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectReader.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image.h" />
@@ -144,6 +145,7 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MaterialReader.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectReader.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
