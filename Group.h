@@ -20,16 +20,16 @@ private:
 public:
 	int vertexLength = 0;
 	Group(string name, string material);
+	void setName(string name);
 	void addFace(Face* face);
 	void addFace(vector<int> verts, vector<int> texts, vector<int> norms);
+	vector<Face*> getFaces();
 	void setMaterial(string material);
-	void setName(string name);
+	string getMaterial();
 	void setTextureIndex(GLuint index);
+	GLuint getTextureIndex();
 	void setVAOIndex(GLuint vaoIndex);
 	GLuint getVAOIndex();
-	vector<Face*> getFaces();
-	string getMaterial();
-	GLuint getTextureIndex();
 
 };
 

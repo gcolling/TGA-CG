@@ -18,16 +18,16 @@ private:
 public:
 	Material(string materialId);
 	void setMaterialId(string materialId);
-	void setTextureFile(string textureFile);
-	void setKa(float r, float g, float b);
-	void setKs(float r, float g, float b);
-	void setKd(float r, float g, float b);
-	void setNs(float ns);
-	string getTextureFile();
 	string getMaterialid();
+	void setTextureFile(string textureFile);
+	string getTextureFile();
+	void setKa(float r, float g, float b);
 	glm::vec3 getKa();
-	glm::vec3 getKd();
+	void setKs(float r, float g, float b);
 	glm::vec3 getKs();
+	void setKd(float r, float g, float b);
+	glm::vec3 getKd();
+	void setNs(float ns);
 	float getNs();
 };
 #endif

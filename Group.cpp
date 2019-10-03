@@ -8,10 +8,6 @@ Group::Group(string name, string material) {
 	this->material = material;
 }
 
-void Group::setMaterial(string material) {
-	this->material = material;
-}
-
 void Group::setName(string name) {
 	this->name = name;
 }
@@ -31,8 +27,20 @@ vector<Face*> Group::getFaces() {
 	return this->faces;
 }
 
+void Group::setMaterial(string material) {
+	this->material = material;
+}
+
 string Group::getMaterial() {
 	return this->material;
+}
+
+void Group::setTextureIndex(GLuint index) {
+	this->textureIndex = index;
+}
+
+GLuint Group::getTextureIndex() {
+	return this->textureIndex;
 }
 
 void Group::setVAOIndex(GLuint vaoIndex) {
@@ -41,12 +49,4 @@ void Group::setVAOIndex(GLuint vaoIndex) {
 
 GLuint Group::getVAOIndex() {
 	return this->VAO;
-}
-
-GLuint Group::getTextureIndex() {
-	return this->textureIndex;
-}
-
-void Group::setTextureIndex(GLuint index) {
-	this->textureIndex = index;
 }

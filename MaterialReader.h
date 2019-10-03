@@ -10,13 +10,13 @@
 #include <vector>
 
 class MaterialReader {
-	private:
-		string filename;
-		ifstream file;
-		bool success;
+private:
+	ifstream file;
+	string filename;
+	bool success;
 
-	public:
-		MaterialReader(string filename);
-		vector<Material*> readFile();
+public:
+	MaterialReader(string filename);
+	vector<Material*> readFile();
 };
 #endif

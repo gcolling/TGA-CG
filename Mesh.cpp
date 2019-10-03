@@ -1,7 +1,7 @@
 #include "Mesh.h"
 
 Mesh::Mesh() {
-	Group* defaultGroup = new Group("default", "");
+	Group* defaultGroup = new Group("group", "");
 	this->groups.push_back(defaultGroup);
 	this->mainShader = new Shader("vs.glsl", "fs.glsl");
 	this->activeGroup = 0;
@@ -15,9 +15,9 @@ Shader* Mesh::getShader() {
 	return this->mainShader;
 }
 
-void Mesh::addMapping(float x, float y) {
+void Mesh::addTexture(float x, float y) {
 	glm::vec2 mapping = glm::vec2(x, y);
-	this->mappings.push_back(mapping);
+	this->texture.push_back(mapping);
 }
 
 void Mesh::addNormal(float x, float y, float z) {
@@ -83,8 +83,8 @@ vector<glm::vec3> Mesh::getVertex() {
 	return this->vertex;
 }
 
-vector<glm::vec2> Mesh::getMappings() {
-	return this->mappings;
+vector<glm::vec2> Mesh::getTexture() {
+	return this->texture;
 }
 
 vector<glm::vec3> Mesh::getNormals() {

@@ -11,9 +11,9 @@ using namespace std;
 
 class ObjectReader {
 private:
-	string filename;
-	ifstream file;
 	Mesh* mesh;
+	ifstream file;
+	string filename;
 
 public:
 	ObjectReader(string filename);

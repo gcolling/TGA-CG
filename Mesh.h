@@ -15,7 +15,7 @@ using namespace std;
 
 class Mesh {
 private:
-	vector<glm::vec2> mappings;
+	vector<glm::vec2> texture;
 	vector<glm::vec3> vertex;
 	vector<glm::vec3> normals;
 	vector<Group*> groups;
@@ -26,9 +26,12 @@ private:
 
 public:
 	Mesh();
-	void addMapping(float x, float y);
 	void addVertex(float x, float y, float z);
+	vector<glm::vec3> getVertex();
+	void addTexture(float x, float y);
+	vector<glm::vec2> getTexture();
 	void addNormal(float x, float y, float z);
+	vector<glm::vec3> getNormals();
 	int newGroup(string name);
 	void setObjectFile(string objectFile);
 	void setActiveGroup(int groupPointer);
@@ -37,12 +40,8 @@ public:
 	void addFace(vector<int> verts, vector<int> texts, vector<int> norms);
 	void addFace(Face* face);
 	vector<Group*> getGroups();
-	vector<glm::vec3> getVertex();
-	vector<glm::vec3> getNormals();
-	vector<glm::vec2> getMappings();
 	Shader* getShader();
 	string getMaterialFile();
-
 	bool isInitialGroup = true;
 };
 

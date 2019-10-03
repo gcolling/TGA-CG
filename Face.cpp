@@ -4,37 +4,37 @@
 using namespace std;
 
 void Face::addVertexInfo(int vertexIndex, int textureIndex, int normalIndex) {
-	this->verts.push_back(vertexIndex);
-	this->texts.push_back(textureIndex);
-	this->norms.push_back(normalIndex);
+	this->vertices.push_back(vertexIndex);
+	this->textures.push_back(textureIndex);
+	this->normals.push_back(normalIndex);
 }
 
 void Face::setInfo(vector<int> verts, vector<int> texts, vector<int> norms) {
-	this->setNorms(norms);
-	this->setTexts(texts);
-	this->setVerts(verts);
+	this->setVertices(verts);
+	this->setTextures(texts);
+	this->setNormals(norms);
 }
 
-void Face::setNorms(vector<int> norms) {
-	this->norms = norms;
+void Face::setVertices(vector<int> verts) {
+	this->vertices = verts;
 }
 
-void Face::setVerts(vector<int> verts) {
-	this->verts = verts;
+vector<int> Face::getVertices() {
+	return this->vertices;
 }
 
-void Face::setTexts(vector<int> texts) {
-	this->texts = texts;
+void Face::setTextures(vector<int> texts) {
+	this->textures = texts;
 }
 
-vector<int> Face::getVerts() {
-	return this->verts;
+vector<int> Face::getTextures() {
+	return this->textures;
 }
 
-vector<int> Face::getNorms() {
-	return this->norms;
+void Face::setNormals(vector<int> norms) {
+	this->normals = norms;
 }
 
-vector<int> Face::getTexts() {
-	return this->texts;
+vector<int> Face::getNormals() {
+	return this->normals;
 }

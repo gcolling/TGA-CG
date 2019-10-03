@@ -5,7 +5,7 @@ MaterialReader::MaterialReader(string filename) {
 	this->file.open(filename);
 
 	if (this->file.fail()) {
-		printf("It was not possible to open the file\n");
+		printf("Problem while opening material file\n");
 		this->success = false;
 	}
 	else {
@@ -48,15 +48,9 @@ vector<Material*> MaterialReader::readFile() {
 			float r, g, b;
 			sline >> r >> g >> b;
 
-			if (temp == "Ks") {
-				materials[index]->setKs(r, g, b);
-			}
-			else if (temp == "Kd") {
-				materials[index]->setKd(r, g, b);
-			}
-			else if (temp == "Ka") {
-				materials[index]->setKa(r, g, b);
-			}
+			if (temp == "Ka") materials[index]->setKa(r, g, b);
+			else if (temp == "Ks") materials[index]->setKs(r, g, b);
+			else if (temp == "Kd") materials[index]->setKd(r, g, b);
 		}
 		else if (temp == "Ns") {
 			float ns;

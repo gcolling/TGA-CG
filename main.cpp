@@ -55,11 +55,14 @@ vector<Material*> materials;
 int main() {
 	vector<Object*> objects;
 
-	Object* obj1 = new Object("mesa01.obj");
+	Object* obj1 = new Object("floor.obj");
 	objects.push_back(obj1);
 
 	Object* obj2 = new Object("cube.obj");
 	objects.push_back(obj2);
+
+	Object* obj3 = new Object("woodcrate.obj");
+	objects.push_back(obj3);
 
 	if (!glfwInit()) {
 		fprintf(stderr, "ERROR: could not start GLFW3\n");
@@ -93,35 +96,7 @@ void window_size_callback(GLFWwindow* window, int width, int height){
 }
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos){
-	/*if (firstMouse)
-	{
-		previousX = xpos;
-		previousY = ypos;
-		firstMouse = false;
-	}
-
-	float xoffset = xpos - previousX;
-	float yoffset = previousY - ypos;
-	previousX = xpos;
-	previousY = ypos;
-
-	float sensitivity = 0.1;
-	xoffset *= sensitivity;
-	yoffset *= sensitivity;
-
-	yaw += xoffset;
-	pitch += yoffset;
-
-	if (pitch > 89.0f)
-		pitch = 89.0f;
-	if (pitch < -89.0f)
-		pitch = -89.0f;
-
-	glm::vec3 front;
-	front.y = cos(glm::radians(yaw)) * sin(glm::radians(pitch));
-	front.x = cos(glm::radians(pitch));
-	front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-	cameraFront = glm::normalize(front);*/
+	
 }
 
 void processInput(vector<Object*> objects){
@@ -130,6 +105,9 @@ void processInput(vector<Object*> objects){
 	}
 
 	//selecting objects
+	if (glfwGetKey(window, GLFW_KEY_0) == GLFW_PRESS) {
+		disableObjects(objects);
+	}
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
 		disableObjects(objects);
 		objects[0]->toggleSelected();
@@ -138,9 +116,11 @@ void processInput(vector<Object*> objects){
 		disableObjects(objects);
 		objects[1]->toggleSelected();
 	}
+	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) {
+		disableObjects(objects);
+		objects[2]->toggleSelected();
+	}
 	
-	// vou trabalhar com classe obj3d, que possui uma mesh e atributo selected (bool) e atributo model (transform)
-	// cada obj vai ter a sua model
 	int selectedIndex = getSelectedIndex(objects);
 	if (selectedIndex != -1 && isModelKey() == true) {
 		vector<float> center = objects[selectedIndex]->getCenter();
@@ -281,18 +261,16 @@ void preparePrintingData(vector<Object*> objects) {
 		for (int i = 0; i < mesh->getGroups().size(); i++) {
 			vector<Face*> faces = mesh->getGroups()[i]->getFaces();
 			for (int j = 0; j < faces.size(); j++) {
-				vector<int> vertsIndex = faces[j]->getVerts();
-				vector<int> textsIndex = faces[j]->getTexts();
-				vector<int> normsIndex = faces[j]->getNorms();
-
-				if (vertsIndex.size() != normsIndex.size()) {
-					throw "Vertex and Normal length differ.";
-				}
+				vector<int> vertsIndex = faces[j]->getVertices();
+				vector<int> textsIndex = faces[j]->getTextures();
+				vector<int> normsIndex = faces[j]->getNormals();
 
 				for (int k = 0; k < vertsIndex.size(); k++) {
+					glm::vec3 n;
+					glm::vec2 t;
 					glm::vec3 v = mesh->getVertex()[vertsIndex[k]];
-					glm::vec2 t = mesh->getMappings()[textsIndex[k]];
-					glm::vec3 n = mesh->getNormals()[normsIndex[k]];
+					if(textsIndex.size() != 0) t = mesh->getTexture()[textsIndex[k]];
+					if(normsIndex.size() != 0) n = mesh->getNormals()[normsIndex[k]];
 
 					vs.push_back(v.x);
 					vs.push_back(v.y);
@@ -330,7 +308,7 @@ void preparePrintingData(vector<Object*> objects) {
 
 			if (mesh->getGroups()[i]->getMaterial() != "") {
 
-				Material* material = getMaterialObject(mesh->getGroups()[i]->getMaterial()); //@TODO verificar materials e pegar o certo pela id
+				Material* material = getMaterialObject(mesh->getGroups()[i]->getMaterial());
 
 				if (material != nullptr && material->getTextureFile() != "") {
 					unsigned int textureID;
@@ -363,7 +341,7 @@ void preparePrintingData(vector<Object*> objects) {
 					glBindTexture(GL_TEXTURE_2D, 0);
 				}
 			}
-			glBindVertexArray(0); // use mesh->getGroups()[i]->getVAOIndex()
+			glBindVertexArray(0);
 			vs.clear();
 		}
 	}
@@ -398,10 +376,10 @@ void draw(vector<Object*> objects) {
 			mesh->getShader()->setMat4("projection", projection);
 			mesh->getShader()->setMat4("model", objects[o]->getModel());
 			if (objects[o]->isSelected() == true) {
-				mesh->getShader()->setFloat("selected", 1.0);
+				mesh->getShader()->setVec4("color", 0.0, 1.0, 0.0, 0.5);
 			}
 			else {
-				mesh->getShader()->setFloat("selected", 0.0);
+				mesh->getShader()->setVec4("color", 1.0, 1.0, 1.0, 0.0);
 			}
 
 			for (int i = 0; i < mesh->getGroups().size(); i++) {
@@ -412,7 +390,7 @@ void draw(vector<Object*> objects) {
 				glBindTexture(GL_TEXTURE_2D, mesh->getGroups()[i]->getTextureIndex());
 
 				if (mesh->getGroups()[i]->getMaterial() != "") {
-					Material* material = getMaterialObject(mesh->getGroups()[i]->getMaterial()); //@TODO verificar a lib de materials e pegar o certo pela id
+					Material* material = getMaterialObject(mesh->getGroups()[i]->getMaterial());
 				}
 
 				glDrawArrays(GL_TRIANGLES, 0, mesh->getGroups()[i]->getFaces().size() * 3);
